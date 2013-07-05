@@ -22,7 +22,6 @@ As listas são compostas normalmente por um array e uma váriavel para contar a 
     Lista *create () {
         Lista *l = malloc(sizeof(Lista));
         l->quantElementos = 0;
-
         return l;
     }
 
@@ -135,13 +134,10 @@ Opção 1: Recebe uma estrutura completa do tipo Lista. A mesma contem a quantid
         int i, j, aux;
 
         for (i = 1; i < l->quantElementos; i++) {
-            
             aux = l->dados[i];
-
             for (j = i - 1; j >= 0 && aux < l->dados[j]; j--) {
                 l->dados[j + 1] = l->dados[j];
             }
-
             l->dados[j + 1] = aux;
         }
     }
@@ -153,11 +149,9 @@ Opção 2: Passa o vetor e o tamanho dele através dos parametros da função.
 
         for (i = 1; i <= size; i++) {
             currentPosition = elements[i];
-
             for (j = i - 1; j >= 0 && elements[j] > currentPosition; j--) {
                 elements[j + 1] = elements[j];
             }
-
             elements[j + 1] = currentPosition;
         }
     }
@@ -173,15 +167,12 @@ Opção 1: Recebe uma estrutura completa do tipo Lista. A mesma contem a quantid
         int i, j, menorElemento, aux;
 
         for (i = 0; i < l->quantElementos - 1; i++) {
-            
             menorElemento = i;
-
             for (j = i + 1; j < l->quantElementos; j++) {
                 if (l->dados[j] < l->dados[menorElemento]) {
                     menorElemento = j;
                 }
             }
-
             aux = l->dados[i];
             l->dados[i] = l->dados[menorElemento];
             l->dados[menorElemento] = aux;
@@ -222,13 +213,11 @@ Merge serve para concatenar dois vetores (ordenados) em um único, mantendo a or
         k = 0;
 
         while (i < q && j < r) {
-
             if (v[i] <= v[j]) {
                 w[k++] = v[i++];
             } else {
                 w[k++] = v[j++];
             }
-
         }
 
         while (i < q) {
