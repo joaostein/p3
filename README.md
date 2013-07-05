@@ -1,7 +1,5 @@
 # 1º Bimestre
 
----
-
 ## Listas Lineares
 
 As listas são compostas normalmente por um array e uma váriavel para contar a quantidade de elementos já inseridos. As ações que utilizamos em uma lista são:
@@ -87,7 +85,7 @@ As listas são compostas normalmente por um array e uma váriavel para contar a 
         printf("Elemento não encontrado.\n");
     }
 
----
+
 
 ## Ordenação
 
@@ -251,7 +249,6 @@ Merge serve para concatenar dois vetores (ordenados) em um único, mantendo a or
 
 Utiliza a funçao merge para ordenar o vetor. Consiste em ir dividindo o vetor principal em vetores menores até o momento que fica apenas um unico elemento. Depois, vai dando merge e ordenando os vetores menores e formando o vetor original, porém ordenado.
 
-
     int mergeSort (int p, int r, int v[]) {
         if (p < r - 1) {
             int q = (p + r) / 2;
@@ -262,6 +259,18 @@ Utiliza a funçao merge para ordenar o vetor. Consiste em ir dividindo o vetor p
     }
 
 ### Quicksort
+
+    void quickSort (int p, int r, int v[]) {
+        int q;
+
+        if (p < r) {
+            q = particao(p, r, v);
+            quickSort(p, q - 1, v);
+            quickSort(q + 1, r, v);
+        }
+    }
+
+#### Partição (quicksort)
 
     int particao (int p, int r, int v[]) {
         int i, j, temp, pivo;
@@ -283,22 +292,9 @@ Utiliza a funçao merge para ordenar o vetor. Consiste em ir dividindo o vetor p
         return j;
     }
 
-
-
-    void quickSort (int p, int r, int v[]) {
-        int q;
-
-        if (p < r) {
-            q = particao(p, r, v);
-            quickSort(p, q - 1, v);
-            quickSort(q + 1, r, v);
-        }
-    }
-
 ### Countingsort
 
 É uma forma de ordenação estável. Ela não utiliza comparações.
-
 
     void countingSort (int *vetor, int tamanho, int k) {
         int *aux, *saida;
@@ -332,9 +328,6 @@ Utiliza a funçao merge para ordenar o vetor. Consiste em ir dividindo o vetor p
         free(saida);
     }
 
-
----
-
 ## Listas encadeadas
 
 ### Lista Simplesmente Encadeada
@@ -355,6 +348,8 @@ Não disponível.
         return NULL;
     }
 
+#### Criar
+
     Dados *criar(char *nome, char *cpf, int idade) {
         Dados *novo = (Dados *) malloc(sizeof(Dados));
         strcpy(novo->nome, nome);
@@ -366,6 +361,8 @@ Não disponível.
         return novo;
     }
 
+#### Inserir
+
     Dados *inserir(Dados *lista, Dados *pessoa){
         if(lista != NULL) {
             lista->ant = pessoa;
@@ -375,6 +372,8 @@ Não disponível.
         return pessoa;
     }
 
+#### Imprimir
+
     void imprimir(Dados *lista) {
         Dados *aux = lista;
 
@@ -383,6 +382,8 @@ Não disponível.
             aux = aux->prox;
         }
     }
+
+#### Consultar
 
     Dados *consultar(Dados *lista, char *cpf) {
         Dados *aux = lista;
@@ -394,11 +395,15 @@ Não disponível.
         return aux;
     }
 
+#### Imprimir Pessoa
+
     void imprimirPessoa(Dados *pessoa) {
         puts(pessoa->nome);
         puts(pessoa->cpf);
         printf("%d\n", pessoa->idade);
     }
+
+#### Remover
 
     Dados *remover(Dados *lista, Dados *pessoa) {
         if(pessoa->ant == NULL) {
@@ -418,7 +423,10 @@ Não disponível.
         }
     }
 
----
+
+
+# 2º Bimestre
+
 
 ## Pilha
 
@@ -435,12 +443,16 @@ LIFO. Só pode remover os elemento que está no topo. O último que entrou.
         ItemPilha *topo;
     } Pilha;
 
+#### Create
+
     Pilha *create () {
         Pilha *p = malloc(sizeof(Pilha));
         p->topo = NULL;
 
         return p;
     }
+
+#### Push
 
     void push (Pilha *p, int elemento) {
         ItemPilha *itemPilha = malloc(sizeof(ItemPilha));
@@ -452,6 +464,8 @@ LIFO. Só pode remover os elemento que está no topo. O último que entrou.
 
         p->topo = itemPilha;
     }
+
+#### Pop
 
     int pop (Pilha *p) {
         if (!isEmpty(p)) {
@@ -465,6 +479,8 @@ LIFO. Só pode remover os elemento que está no topo. O último que entrou.
         }
     }
 
+#### Peek
+
     int peek (Pilha *p) {
         if (isEmpty(p)) {
             printf("A pilha está vazia. Não há elementos no topo\n");
@@ -472,6 +488,8 @@ LIFO. Só pode remover os elemento que está no topo. O último que entrou.
             return p->topo->dado;
         }
     }
+
+#### isEmpty
 
     int isEmpty (Pilha *p) {
         return p->topo == NULL;
@@ -486,11 +504,15 @@ LIFO. Só pode remover os elemento que está no topo. O último que entrou.
         int topo;
     } Pilha;
 
+#### Create
+
     Pilha *create () {
         Pilha *p = malloc(sizeof(Pilha));
         p->topo = -1;
         return p;
     }
+
+#### Push
 
     void push (Pilha *p, int dado) {
         if (p->topo >= TAM - 1) {
@@ -500,6 +522,8 @@ LIFO. Só pode remover os elemento que está no topo. O último que entrou.
             p->dado[p->topo] = dado;
         }
     }
+
+#### Peek
 
     int peek (Pilha *p) {
         if (isEmpty(p)) {
@@ -511,6 +535,8 @@ LIFO. Só pode remover os elemento que está no topo. O último que entrou.
         }
     }
 
+#### Pop
+
     void pop (Pilha *p) {
         if (isEmpty(p)) {
             printf("A lista está vazia, não existe elementos nela.\n");
@@ -519,11 +545,12 @@ LIFO. Só pode remover os elemento que está no topo. O último que entrou.
         }
     }
 
+#### isEmpty
+
     int isEmpty (Pilha *p) {
         return p->topo == -1;
     }
 
----
 
 ## Fila
 
@@ -541,6 +568,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         ItemFila *fim;
     } Fila;
 
+#### Create
+
     Fila *create () {
         Fila *f = malloc(sizeof(Fila));
         f->inicio = NULL;
@@ -548,6 +577,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
 
         return f;
     }
+
+#### Push
 
     void push (Fila *f, int elemento) {
         ItemFila *itemFila = malloc(sizeof(ItemFila));
@@ -563,6 +594,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         f->fim = itemFila;
     }
 
+#### Pop
+
     int pop (Fila *f) {
         if (isEmpty(f)) {
             printf("Impossível remover elementos. A fila está vazia.\n");
@@ -575,6 +608,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
             return dado;
         }
     }
+
+#### Peek
 
     int peek (Fila *f) {
         return f->inicio->dado;
@@ -593,6 +628,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         int inicio, quantidadeElementos;
     } Fila;
 
+#### Create
+
     Fila *create () {
         Fila *f = malloc(sizeof(Fila));
         f->inicio = 0;
@@ -600,6 +637,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
 
         return f;
     }
+
+#### Push
 
     void push (Fila *f, int elemento) {
         if (f->quantidadeElementos == TAMANHO) {
@@ -609,6 +648,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
             f->quantidadeElementos ++;
         }
     }
+
+#### Pop
 
     int pop (Fila *f) {
         if (isEmpty(f)) {
@@ -622,6 +663,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         }
     }
 
+#### Peek
+
     int peek (Fila *f) {
         if (isEmpty(f)) {
             printf("Impossível consultar o dado do primeiro da fila. A fila está vazia.\n");
@@ -630,11 +673,13 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         }
     }
 
+#### isEmpty
+
     int isEmpty (Fila *f) {
         return f->quantidadeElementos == 0;
     }
 
----
+
 
 ## Árvore binária de busca
 
@@ -644,9 +689,13 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         int dado;
     } No;
 
+#### Create
+
     No *create () {
         return NULL;
     }
+
+#### Push
 
     void push (No **raiz, int elemento) {
         
@@ -671,6 +720,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
             push(&((*raiz)->dir), elemento);
         }
     }
+
+#### Search
 
     No *search (No *raiz, int elemento) {
         
@@ -700,7 +751,7 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         }
     }
 
-    // Função que encontra e retorna o menor valor de uma sub-árvore
+#### Menor valor da sub-arvore
 
     No *menorValor (No **raiz) {
         
@@ -720,8 +771,7 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         }
     }
 
-
-    // Função que remove de fato o nó
+#### Remover Nó
 
     void removerNo (No **raiz) {
         No *pos = *raiz;
@@ -754,7 +804,7 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         free(pos);
     }
 
-    // Função que inicio o processo de remoção de um nó.
+#### Remover
 
     int remover (No **raiz, int elemento) {
         
@@ -817,7 +867,7 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         }
     }
 
----
+
 
 ## Tabela de dispersão
 
@@ -836,9 +886,13 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         return (mat % 100);
     }
 
+#### Create
+
     No *criar_lista () {
         return NULL;
     }
+
+#### Inserir Lista
 
     No *inserir_lista (No *l, Aluno a) {
         No *no = malloc(sizeof(No));
@@ -847,6 +901,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         l = no;
         return l;
     }
+
+#### Consultar Lista
 
     No *consultar_lista (No *lista, long m) {
         No *no;
@@ -858,6 +914,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         return NULL;
     }
 
+#### Inserir
+
     void inserir (No **t, Aluno a) {
         int h = hash(a.mat);
         No *no;
@@ -868,6 +926,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
             printf("\n\nMatricula ja cadastradada!!");
         }
     }
+
+#### Alterar Lista
 
     No *alterar_lista (No *lista, long m) {
         No *no;
@@ -886,6 +946,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
         return NULL;
     }
 
+#### Alterar
+
     void alterar (No **t, Aluno a) {
         int h = hash(a.mat);
         No *no;
@@ -894,6 +956,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
             printf("Nao encontrado");
         }
     }
+
+#### Consultar
 
     void consultar (No **t, long m) {
         int h = hash(m);
@@ -907,6 +971,8 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
             printf("\nEmail: %s", no->dados.email);
         }
     }
+
+#### Remover
 
     void remover (No **t, long m) {
         int h = hash(m);
@@ -930,11 +996,3 @@ FIFO. O primeiro elemento que foi inserido na lista, é o primeiro a sair, segui
             no = no->prox;
         }
     }
-
-
-
-
-
-
-
-
